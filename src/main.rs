@@ -30,6 +30,9 @@ struct Cli {
 
     #[arg(long)]
     stash: bool,
+
+    #[arg(long)]
+    version: bool,
 }
 
 #[derive(Debug, Clone)]
@@ -346,6 +349,11 @@ async fn pull_repo(
 #[tokio::main]
 async fn main() -> Result<()> {
     let cli = Cli::parse();
+
+    if cli.version {
+        println!("celer {}", env!("CARGO_PKG_VERSION").blue());
+        return Ok(());
+    }
 
     let ignore_set: HashSet<String> = cli.ignore.into_iter().collect();
     let only_set: HashSet<String> = cli.only.into_iter().collect();
