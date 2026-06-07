@@ -1,0 +1,13 @@
+[package]
+name = "celer"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tokio = { version = "1.44.0", features = ["rt-multi-thread", "process", "macros", "sync"] }
+clap = { version = "4.5.35", features = ["derive"] }
+indicatif = "0.17.11"
+colored = "3.0.0"
+walkdir = "2.5.0"
+anyhow = "1.0.97"
+num_cpus = "1.16.0"
