@@ -2,6 +2,11 @@
 name = "celer"
 version = "0.1.0"
 edition = "2024"
+description = "Parallel git repo puller with live progress, dirty detection, and safe defaults"
+license = "MIT"
+repository = "https://github.com/EmreCelenli/celer"
+keywords = ["git", "cli", "pull", "async", "productivity"]
+categories = ["command-line-utilities", "development-tools"]
 
 [dependencies]
 tokio = { version = "1.44.0", features = ["rt-multi-thread", "process", "macros", "sync"] }
@@ -11,3 +16,8 @@ colored = "3.0.0"
 walkdir = "2.5.0"
 anyhow = "1.0.97"
 num_cpus = "1.16.0"
+
+# The profile that 'dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
