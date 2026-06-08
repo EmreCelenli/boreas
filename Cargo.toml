@@ -1,10 +1,10 @@
 [package]
-name = "celer"
+name = "boreas"
 version = "0.1.0"
 edition = "2024"
 description = "Parallel git repo puller with live progress, dirty detection, and safe defaults"
 license = "MIT"
-repository = "https://github.com/EmreCelenli/celer"
+repository = "https://github.com/EmreCelenli/boreas"
 keywords = ["git", "cli", "pull", "async", "productivity"]
 categories = ["command-line-utilities", "development-tools"]
 

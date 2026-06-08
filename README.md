@@ -1,6 +1,6 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/celer-banner-dark.png">
-  <img src="assets/celer-banner-light.png" alt="celer">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/boreas-banner-dark.png">
+  <img src="assets/boreas-banner-light.png" alt="boreas">
 </picture>
 
 Parallel git repo puller with live progress, dirty detection, and safe defaults.
@@ -32,7 +32,7 @@ Requires `cargo` and `git`.
 ## Usage
 
 ```bash
-celer [OPTIONS]
+boreas [OPTIONS]
 ```
 
 ### Flags
@@ -50,25 +50,25 @@ celer [OPTIONS]
 
 ```bash
 # Pull everything in current directory (depth 3)
-celer
+boreas
 
 # Scan a different root
-celer -p ~/projects
+boreas -p ~/projects
 
 # Search deeper
-celer -d 5
+boreas -d 5
 
 # Pull only specific repos
-celer --only backend,frontend
+boreas --only backend,frontend
 
 # Skip specific repos
-celer --ignore old-project,experiments
+boreas --ignore old-project,experiments
 
 # Stash dirty repos, pull, then restore
-celer --stash
+boreas --stash
 
 # Preview without pulling
-celer --dry-run
+boreas --dry-run
 ```
 
 ---
@@ -119,7 +119,7 @@ Exits with code `1` if any pull fails.
 ## Safety
 
 - Dirty repos are **skipped by default** — no blind pulls
-- Use `--stash` to opt into stashing; runs `git stash push -m "celer-auto-stash"`, pulls, then `git stash pop`
+- Use `--stash` to opt into stashing; runs `git stash push -m "boreas-auto-stash"`, pulls, then `git stash pop`
 - Detached HEAD repos are caught and marked `[ERR]`
 
 ---

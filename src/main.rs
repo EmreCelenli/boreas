@@ -10,7 +10,7 @@ use tokio::sync::Semaphore;
 use walkdir::WalkDir;
 
 #[derive(Parser, Debug)]
-#[command(name = "celer")]
+#[command(name = "boreas")]
 #[command(about = "Parallel git repo puller with live progress")]
 struct Cli {
     #[arg(short, long, default_value = ".", default_missing_value = ".", num_args = 0..=1)]
@@ -127,7 +127,7 @@ async fn git_stash(repo: &Path) -> Result<()> {
     let output = Command::new("git")
         .arg("-C")
         .arg(repo)
-        .args(["stash", "push", "-m", "celer-auto-stash"])
+        .args(["stash", "push", "-m", "boreas-auto-stash"])
         .output()
         .await
         .context("failed to run git stash")?;
@@ -351,7 +351,7 @@ async fn main() -> Result<()> {
     let cli = Cli::parse();
 
     if cli.version {
-        println!("celer {}", env!("CARGO_PKG_VERSION").blue());
+        println!("boreas {}", env!("CARGO_PKG_VERSION").blue());
         return Ok(());
     }
 
