@@ -22,6 +22,10 @@ Parallel git repo puller with live progress, dirty detection, and safe defaults.
 ## Install
 
 ```bash
+# From crates.io
+cargo install boreas
+
+# Or build from source
 cargo install --path .
 ```
 
