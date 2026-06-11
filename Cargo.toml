@@ -1,6 +1,6 @@
 [package]
 name = "boreas"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2024"
 description = "Parallel git repo puller with live progress, dirty detection, and safe defaults"
 license = "MIT"
