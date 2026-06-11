@@ -10,6 +10,7 @@ Parallel git repo puller with live progress, dirty detection, and safe defaults.
 ## Features
 
 - **Parallel Pulls** — Pull dozens of repos at once using tokio async workers
+- **Recursive Discovery** — Finds git repos nested at any depth; pulls only the outermost repo when repos contain other repos
 - **Live Progress** — Watch real-time status lines for every repo as they update
 - **Dirty Detection** — Automatically skips repos with uncommitted changes so you never lose work
 - **Stash Mode** — Optional `--stash` to safely stash, pull, and pop your changes
@@ -79,10 +80,10 @@ boreas --dry-run
 
 ## Live Status
 
-Each repo gets a live line:
+Each repo gets a live line showing its relative path from `--path`:
 
 ```
-repo-name | branch | [TAG] message
+relative/path/to/repo | branch | [TAG] message
 ```
 
 | Tag | Meaning |
