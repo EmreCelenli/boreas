@@ -66,7 +66,17 @@ fn find_git_repos(root: &Path, depth: usize) -> Vec<PathBuf> {
             }
         }
     }
-    repos
+
+    // Keep only outermost repos: if one repo is inside another, discard the inner one
+    repos.sort();
+    let mut outermost = Vec::new();
+    for repo in repos {
+        let is_nested = outermost.iter().any(|outer| repo.starts_with(outer));
+        if !is_nested {
+            outermost.push(repo);
+        }
+    }
+    outermost
 }
 
 fn repo_name(path: &Path) -> String {
@@ -169,11 +179,12 @@ fn set_status(pb: &ProgressBar, name: &str, branch: &str, icon: &str, status: &s
 
 async fn pull_repo(
     repo_path: PathBuf,
+    display_name: String,
     mp: MultiProgress,
     dry_run: bool,
     stash: bool,
 ) -> RepoResult {
-    let name = repo_name(&repo_path);
+    let name = display_name;
 
     let pb = mp.add(ProgressBar::new_spinner());
     pb.enable_steady_tick(Duration::from_millis(100));
@@ -395,13 +406,18 @@ async fn main() -> Result<()> {
 
     let mut tasks = Vec::with_capacity(total);
     for repo in filtered {
+        let display_name = repo
+            .strip_prefix(&cli.path)
+            .unwrap_or(&repo)
+            .to_string_lossy()
+            .to_string();
         let permit = sem.clone().acquire_owned().await.unwrap();
         let mp = mp.clone();
         let dry = cli.dry_run;
         let stash = cli.stash;
         let handle = tokio::spawn(async move {
             let _permit = permit;
-            pull_repo(repo, mp, dry, stash).await
+            pull_repo(repo, display_name, mp, dry, stash).await
         });
         tasks.push(handle);
     }
